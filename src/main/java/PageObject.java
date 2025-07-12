@@ -1,2 +1,4 @@
-public class PageObject {
+public class PageObject
+{
+
 }
