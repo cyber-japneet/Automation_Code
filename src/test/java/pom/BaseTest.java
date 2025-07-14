@@ -9,6 +9,8 @@ public class BaseTest
 {
     protected WebDriver driver;
 
+    //before/after and any other common methods for tests
+
     @BeforeMethod
     public void setup()
     {
