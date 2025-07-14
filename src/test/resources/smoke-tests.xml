@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="/Users/japneetsachdeva/Desktop/java/SeleniumWebDriver/SeleniumFramework">
+        <classes>
+            <class name="pom.Test1">
+                <methods>
+                    <include name="e2eTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
