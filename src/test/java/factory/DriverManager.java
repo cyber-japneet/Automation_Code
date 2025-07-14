@@ -33,6 +33,15 @@ public class DriverManager
             driver = new ChromeDriver(options);
         }
 
+        else if(Configuration.executionMode.equalsIgnoreCase("git")) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(options);
+        }
+
         else{System.out.println("Invalid execution mode!!!");}
 
         return driver;
