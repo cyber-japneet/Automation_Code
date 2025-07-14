@@ -1,6 +1,7 @@
 package factory;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -11,9 +12,10 @@ public class DriverManager
 {
     private static final String SELENIUM_HUB_URL = "http://localhost:4444/wd/hub";
     WebDriver driver;
+
     public WebDriver initializeDriver(String driverName)
     {
-        if(driverName.trim().equalsIgnoreCase("chrome"))
+        if(Configuration.executionMode.equalsIgnoreCase("docker"))
         {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--start-maximized");
@@ -24,8 +26,14 @@ public class DriverManager
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
-            //driver = new ChromeDriver(options);
         }
+        else if(Configuration.executionMode.equalsIgnoreCase("local")) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+        }
+
+        else{System.out.println("Invalid execution mode!!!");}
 
         return driver;
     }

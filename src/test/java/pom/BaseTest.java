@@ -12,7 +12,7 @@ public class BaseTest
     @BeforeMethod
     public void setup()
     {
-        driver = new DriverManager().initializeDriver("CHROME");
+        driver = new DriverManager().initializeDriver("chrome");
     }
 
     @AfterMethod
