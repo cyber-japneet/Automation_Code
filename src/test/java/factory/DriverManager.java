@@ -39,6 +39,8 @@ public class DriverManager
             options.addArguments("--disable-gpu");
             options.addArguments("--no-sandbox");
             options.addArguments("--remote-allow-origins=*");
+            options.addArguments("--no-first-run");
+            options.addArguments("--disable-default-apps");
             driver = new ChromeDriver(options);
         }
 
