@@ -14,7 +14,7 @@ pipeline {
           docker.image('maven:3.8.7-openjdk-17').inside('--network test-net') {
             sh '''
               mvn clean test \
-                -Dmode=docker -Dwebdriver.remote.url=${SELENIUM_HUB_URL}
+                -Dwebdriver.remote.url=${SELENIUM_HUB_URL}
             '''
           }
         }
