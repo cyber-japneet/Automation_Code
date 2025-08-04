@@ -1,0 +1,20 @@
+# Dockerfile for custom Jenkins image with Docker CLI
+# ---------------------------------------------------
+# This Dockerfile extends the official Jenkins LTS image
+# and installs the Docker CLI so Jenkins can manage containers.
+
+FROM jenkins/jenkins:lts
+
+# Switch to root to install packages
+USER root
+
+# Install Docker CLI (docker.io provides the client and dependencies)
+RUN apt-get update \
+    && apt-get install -y docker.io \
+    && rm -rf /var/lib/apt/lists/*
+
+# Return to the Jenkins user
+USER jenkins
+
+# End of Dockerfile
+# ---------------------------------------------------
