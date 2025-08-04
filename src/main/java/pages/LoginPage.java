@@ -9,11 +9,12 @@ public class LoginPage extends BasePage
         super(driver);
     }
 
-    public HomePage loginUser()
+    //functional page object model
+    public void loginUser()
     {
-        driver.findElement(By.id("email")).sendKeys("customer@practicesoftwaretesting.com");
-        driver.findElement(By.id("password")).sendKeys("welcome01");
+        driver.findElement(By.id("email")).sendKeys("customer3@practicesoftwaretesting.com");
+        driver.findElement(By.id("password")).sendKeys("pass123");
         driver.findElement(By.xpath("//input[@data-test='login-submit']")).click();
-        return new HomePage(driver);
+        new HomePage(driver);
     }
 }

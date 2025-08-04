@@ -11,8 +11,15 @@ public class HomePage extends BasePage
         super(driver);
     }
 
+    public void routeToHomePage()
+    {
+        driver.get("https://practicesoftwaretesting.com/account");
+    }
+
+    //functional page object model
     public StorePage clickItem()
     {
+        driver.navigate().refresh();
         driver.findElement(By.xpath("//a[@data-test='nav-home']")).click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,100);");

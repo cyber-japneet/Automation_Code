@@ -9,8 +9,10 @@ public class StorePage extends BasePage
         super(driver);
     }
 
-    public void selectItem()
+    //structural page object model
+    public ItemPage selectItem()
     {
         driver.findElement(By.xpath("//img[@alt='Combination Pliers']")).click();
+        return new ItemPage(driver);
     }
 }

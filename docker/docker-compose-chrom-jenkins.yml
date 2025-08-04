@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"     # Jenkins UI
+      - "50000:50000"   # Jenkins agent port (not used here, but default)
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock   # so Jenkins can launch Docker containers
+    networks:
+      - test-net
+
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    container_name: chrome
+    privileged: true
+    shm_size: 2gb
+    ports:
+      - "4441:4444"    # maps host:4441 → container:4444 (WebDriver)
+      - "7901:7900"    # VNC if you ever need it
+    environment:
+      - SE_VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=1
+    networks:
+      - test-net
+
+volumes:
+  jenkins_home:
+
+networks:
+  test-net:
+    driver: bridge

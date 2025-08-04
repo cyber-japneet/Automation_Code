@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true"
-          name="/Users/japneetsachdeva/Desktop/java/SeleniumWebDriver/SeleniumFramework">
+
+<suite name="All Test Suite" parallel="tests" thread-count="1" >
+    <test name="E2E Test Chrome">
+        <parameter name="browserName" value="CHROME"/>
         <classes>
-            <class name="pom.Test1">
+            <class name="tests.E2ETest">
                 <methods>
                     <include name="e2eTest"/>
                 </methods>
             </class>
         </classes>
     </test>
+
 </suite>

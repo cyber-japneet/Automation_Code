@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Tests" parallel="tests" thread-count="1">
+    <test name="Login test">
+        <parameter name="browserName" value="CHROME"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="validateNewUserLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Message Test">
+        <parameter name="browserName" value="CHROME"/>
+        <classes>
+            <class name="tests.MessageTest">
+                <methods>
+                    <include name="sendMessageTest"/>
+                    <include name="sendReplyMsgTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Favorites Test">
+        <parameter name="browserName" value="CHROME"/>
+        <classes>
+            <class name="tests.FavoritesTest">
+                <methods>
+                    <include name="addItemToFavorites"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
