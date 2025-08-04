@@ -1,31 +1,37 @@
 pipeline {
-  agent any
+  // Use a dedicated Docker container as the build agent
+  agent {
+    docker {
+      image 'maven:3.8.7-openjdk-17'
+      // Join the Compose network and mount Docker socket if you need to call docker CLI
+      args '--network test-net -v /var/run/docker.sock:/var/run/docker.sock'
+    }
+  }
 
   environment {
-    // point at standalone Chrome mapped on port 4441
+    // Standalone Chrome mapped on port 4441
     SELENIUM_HUB_URL = 'http://chrome:4441/wd/hub'
   }
 
   stages {
     stage('Build & Test') {
       steps {
-        script {
-          // Use Maven 3.8.7 with OpenJDK 17
-          docker.image('maven:3.8.7-openjdk-17').inside('--network test-net') {
-            sh '''
-              mvn clean test \
-                -Dwebdriver.remote.url=${SELENIUM_HUB_URL}
-            '''
-          }
-        }
+        // Inside the Maven container, just run the Maven goal directly
+        sh """
+          mvn clean test \
+            -Dwebdriver.remote.url=${SELENIUM_HUB_URL}
+        """
       }
     }
 
     stage('Publish Results') {
       steps {
-        // Publish TestNG report
-        step([$class: 'TestNGPublisher', testResultsPattern: 'test-output/testng-results.xml'])
-        // Archive built artifacts
+        // Publish TestNG reports
+        step([
+          $class: 'TestNGPublisher',
+          testResultsPattern: 'test-output/testng-results.xml'
+        ])
+        // Archive your artifacts
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
